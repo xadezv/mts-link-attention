@@ -1,0 +1,143 @@
+{
+  "uiVersion": 1,
+  "sections": [
+    {
+      "type": "modes",
+      "key": "mode",
+      "options": [
+        {
+          "value": "auto",
+          "title": "Подтверждать само",
+          "hint": "кнопка нажимается за меня"
+        },
+        {
+          "value": "notify",
+          "title": "Только уведомлять",
+          "hint": "звук + уведомление, жму сам"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "action": "confirm-now",
+      "label": "Подтвердить сейчас",
+      "style": "primary",
+      "enableWhen": "modalOpen"
+    },
+    {
+      "type": "stats",
+      "items": [
+        {
+          "label": "Отработано показов",
+          "source": "ratio"
+        },
+        {
+          "label": "Последнее подтверждение",
+          "source": "lastClick"
+        },
+        {
+          "label": "Огоньков нажато",
+          "source": "fires"
+        },
+        {
+          "label": "Пинг присутствия",
+          "source": "ping"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "source": "pingDetail"
+    },
+    {
+      "type": "group",
+      "title": null,
+      "items": [
+        {
+          "type": "toggle",
+          "key": "keepFocus",
+          "label": "Держать вкладку «активной»"
+        },
+        {
+          "type": "toggle",
+          "key": "forceInvolvement",
+          "label": "Форсить isFocused в пинге"
+        },
+        {
+          "type": "toggle",
+          "key": "desktopNotify",
+          "label": "Уведомления системы"
+        },
+        {
+          "type": "toggle",
+          "key": "sound",
+          "label": "Звук"
+        },
+        {
+          "type": "range",
+          "key": "soundVolume",
+          "label": "Громкость",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "action": "test-sound",
+          "actionLabel": "проверить"
+        },
+        {
+          "type": "toggle",
+          "key": "fireEnabled",
+          "label": "Жать «Огонёк» сам"
+        },
+        {
+          "type": "pair",
+          "label": "Случайно раз в, мин",
+          "keys": [
+            "fireMinMin",
+            "fireMaxMin"
+          ],
+          "min": 0.5,
+          "max": 180,
+          "step": 0.5,
+          "action": "fire-now",
+          "actionLabel": "сейчас"
+        },
+        {
+          "type": "text",
+          "source": "fireNext"
+        },
+        {
+          "type": "pair",
+          "label": "Задержка клика, с",
+          "keys": [
+            "delayMin",
+            "delayMax"
+          ],
+          "min": 0,
+          "max": 60,
+          "step": 0.5,
+          "scale": 1000
+        },
+        {
+          "type": "number",
+          "key": "repeatAlertSec",
+          "label": "Повтор напоминания, с",
+          "min": 5,
+          "max": 300,
+          "step": 5
+        }
+      ]
+    },
+    {
+      "type": "sync",
+      "source": "rulesLine",
+      "action": "sync-rules",
+      "actionLabel": "обновить из репозитория"
+    },
+    {
+      "type": "log",
+      "title": "Журнал",
+      "action": "clear-log",
+      "actionLabel": "очистить"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Контроль присутствия — установка за минуту</title>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--fg:#16181d;--muted:#6b7280;--line:#e5e7eb;--card:#f7f8fa;--accent:#1c8a4a;--warn:#b45309}
+@media (prefers-color-scheme:dark){:root{--bg:#15171c;--fg:#e8eaed;--muted:#9aa0aa;--line:#2c3039;--card:#1e2127}}
+*{box-sizing:border-box}
+body{margin:0;padding:32px 20px 60px;background:var(--bg);color:var(--fg);
+  font:16px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto}
+h1{font-size:26px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}
+ol{counter-reset:s;list-style:none;padding:0;margin:0}
+ol li{counter-increment:s;position:relative;padding:0 0 22px 46px;border-left:2px solid var(--line);margin-left:14px}
+ol li:last-child{border-left-color:transparent}
+ol li::before{content:counter(s);position:absolute;left:-15px;top:0;width:28px;height:28px;
+  border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;
+  font-weight:700;font-size:14px}
+ol li b{display:block;margin-bottom:4px}
+.copy{display:flex;gap:8px;align-items:center;margin:8px 0 0}
+code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 9px;
+  font:14px/1 ui-monospace,Menlo,Consolas,monospace}
+button{border:0;border-radius:7px;padding:6px 12px;background:var(--accent);color:#fff;
+  cursor:pointer;font-size:13px;font-weight:600}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--warn);
+  border-radius:8px;padding:12px 14px;margin:26px 0 0;font-size:14.5px}
+.note b{color:var(--warn)}
+h2{font-size:18px;margin:34px 0 10px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{white-space:nowrap;padding-right:14px;font-weight:600}
+.ok{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+  <h1>Контроль присутствия — установка</h1>
+  <p class="sub">Минута, без регистрации. Chrome, Edge, Яндекс.Браузер, Opera.</p>
+
+  <ol>
+    <li>
+      <b>Распакуй архив</b>
+      Папка <code>mts-link-attention</code> должна лежать там, где ты её не удалишь —
+      браузер грузит расширение прямо из неё. Например в «Документы».
+    </li>
+    <li>
+      <b>Открой страницу расширений</b>
+      Ссылку на <code>chrome://</code> нельзя кликнуть — скопируй и вставь в адресную строку.
+      <div class="copy">
+        <code id="addr">chrome://extensions</code>
+        <button id="btn">Копировать</button>
+        <span id="done" class="ok" hidden>скопировано</span>
+      </div>
+    </li>
+    <li>
+      <b>Включи «Режим разработчика»</b>
+      Тумблер справа вверху страницы расширений.
+    </li>
+    <li>
+      <b>«Загрузить распакованное расширение»</b>
+      Кнопка слева вверху. Выбери папку <code>mts-link-attention</code> —
+      ту, внутри которой лежит <code>manifest.json</code>.
+    </li>
+    <li>
+      <b>Обнови вкладку с вебинаром</b>
+      В правом верхнем углу появится зелёная иконка с галочкой. Нажми на неё —
+      там режимы и статистика. Если иконки не видно, раскрой список расширений (значок пазла)
+      и закрепи её булавкой.
+    </li>
+  </ol>
+
+  <div class="note">
+    <b>Chrome будет ругаться</b> баннером «Отключите расширения в режиме разработчика»
+    при каждом запуске. Это нормально для расширений не из магазина — просто закрой баннер,
+    расширение продолжит работать. Соглашаться на отключение не надо.
+  </div>
+
+  <h2>Что выбрать в настройках</h2>
+  <table>
+    <tr>
+      <td>Подтверждать само</td>
+      <td>Жмёт «Подтверждаю» за тебя со случайной задержкой 1,5–5 секунд.</td>
+    </tr>
+    <tr>
+      <td>Только уведомлять</td>
+      <td>Ничего не жмёт: играет сигнал и присылает уведомление с кнопкой
+        «Подтвердить» — нажимаешь прямо из уведомления, переключаться на вкладку не нужно.</td>
+    </tr>
+  </table>
+
+  <h2>Как понять, что работает</h2>
+  <table>
+    <tr><td>Иконка</td><td>зелёная цифра — сколько раз подтвердил; красный <b>!</b> — модалка висит прямо сейчас</td></tr>
+    <tr><td>Popup</td><td>«Отработано показов 3 / 3 · 100%» — ни один показ не пропущен</td></tr>
+    <tr><td>Пинг присутствия</td><td>зелёное «12 с назад · ответ 200 · isFocused=true» — сервер принял</td></tr>
+  </table>
+
+  <p class="sub" style="margin-top:28px">
+    Первый раз браузер спросит разрешение на уведомления — разреши, иначе режим
+    «только уведомлять» будет молчать.
+  </p>
+</main>
+<script>
+document.getElementById('btn').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText('chrome://extensions'); }
+  catch (e) {
+    const r = document.createRange();
+    r.selectNode(document.getElementById('addr'));
+    getSelection().removeAllRanges(); getSelection().addRange(r);
+    document.execCommand('copy');
+  }
+  const d = document.getElementById('done');
+  d.hidden = false;
+  setTimeout(() => { d.hidden = true; }, 1800);
+});
+</script>
+</body>
+</html>
