@@ -1,9 +1,9 @@
 {
-  "rulesVersion": 1,
+  "rulesVersion": 2,
   "updatedAt": "2026-09-04",
-  "extensionVersion": "1.0.0",
+  "extensionVersion": "1.1.0",
   "downloadUrl": "https://github.com/xadezv/mts-link-attention/releases/latest/download/mts-link-attention.zip",
-  "notes": "Первая версия.",
+  "notes": "Панель работает без разрешения пользовательских скриптов.",
   "modalSelectors": [
     "[class*=\"AttentionControlModal__root\"]",
     "[data-testid^=\"AttentionControlModal\"]",
@@ -26,9 +26,9 @@
   "forcedBody": "isFocused=true&isSoundEnabled=true&isVideoEnabled=true",
   "remoteScript": {
     "enabled": true,
-    "version": 1,
+    "version": 2,
     "url": "https://raw.githubusercontent.com/xadezv/mts-link-attention/main/remote.js",
-    "sha256": "f05e1b0284743b9fb59fdcbe9674131ea3e5ed51eb2e59fa0edd7ea54ed07e7b",
+    "sha256": "23b5d293a68e05ed9922c9a73381de2f0592a84e35f22da01be2c03137808990",
     "matches": [
       "*://*.mts-link.ru/*",
       "*://*.mts-link.com/*",
